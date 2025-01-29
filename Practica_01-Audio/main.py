@@ -46,8 +46,8 @@ def main(directory_path):
 
 def extractFeatures(signal):
     return [
-        librosa.feature.zero_crossing_rate(signal)[0,0],
-        librosa.feature.fourier_tempogram(y=signal)[0,0],
+        librosa.feature.spectral_contrast(y=signal)[0,0],
+        librosa.feature.chroma_cens(y=signal)[0,0],
         librosa.feature.mfcc(y=signal)[0,0],
     ]
 
@@ -70,5 +70,6 @@ def prepareData():
 # convertFiles('./AUDIO/Luis-Garcia/Practica-01_Audio/','./AUDIO/All-Audios/','m4a','wav')
 # convertFiles('./AUDIO/Cielo-Higuera/Practica-01_Audio/','./AUDIO/All-Audios/','m4a','wav')
 # convertFiles('./AUDIO/Cielo-Higuera/Practica-01_Audio/','./AUDIO/All-Audios/','m4a','wav')
+# convertFiles('./AUDIO/Clase-Nula/','./AUDIO/All-Audios/','mp4','wav')
 main('./AUDIO/All-Audios/')
 print(prepareData())

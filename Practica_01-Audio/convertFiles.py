@@ -8,7 +8,6 @@ def convertFiles(directoryPath,outputDirectory,fromExt,toExt):
     audio_files = [f for f in os.listdir(directoryPath) if f.endswith(fromExt)]
     outputDir = outputDirectory
     for file in audio_files:
-        print(file)
         subprocess.run(
             ["ffmpeg", "-i", directoryPath+file, outputDir+file.replace(fromExt,toExt)],
             check=True,

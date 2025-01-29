@@ -9,7 +9,7 @@ import librosa, librosa.display
 import math
 import ffmpeg
 from convertFiles import convertFiles
-
+from audioManipulation import timeStretch
 audioToIdx ={
     'AdriaM':0,
     'AleM':1,
@@ -71,5 +71,6 @@ def prepareData():
 # convertFiles('./AUDIO/Cielo-Higuera/Practica-01_Audio/','./AUDIO/All-Audios/','m4a','wav')
 # convertFiles('./AUDIO/Cielo-Higuera/Practica-01_Audio/','./AUDIO/All-Audios/','m4a','wav')
 # convertFiles('./AUDIO/Clase-Nula/','./AUDIO/All-Audios/','mp4','wav')
-main('./AUDIO/All-Audios/')
-print(prepareData())
+# main('./AUDIO/All-Audios/')
+#print(prepareData())
+timeStretch('./AUDIO/David-Murillo/Practica-01_Audio/Mariana-03_05','ogg','wav')

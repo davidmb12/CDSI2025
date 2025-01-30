@@ -1,4 +1,3 @@
-import ffmpeg.audio
 from pydub import AudioSegment
 import ffmpeg
 import os

@@ -12,7 +12,7 @@ import librosa, librosa.display
 import math
 import ffmpeg
 from convertFiles import convertFiles
-from audioManipulation import timeStretch,pitchShift,reverse,denoise
+from audioManipulation import timeStretch,pitchShift,reverse,denoise,preprocess_audio,renameFiles
 audioToIdx ={
     'AdriaM':0,
     'AleM':1,
@@ -54,21 +54,10 @@ def extractFeatures(signal):
         librosa.feature.mfcc(y=signal)[0,0],
         librosa.feature.zero_crossing_rate(y=signal)[0,0],
         librosa.feature.rms(y=signal)[0,0],
-        librosa.feature.melspectrogram(y=signal)
+        librosa.feature.melspectrogram(y=signal),
+        librosa.feature.spectral_rolloff(),
     ]
-def sandbox():
-    features = [
-        np.mean(librosa.feature.mfcc(y=audio_signal[0], sr=audio_signal[1], n_mfcc=13), axis=1)[0],
-        np.var(librosa.feature.mfcc(y=audio_signal[0], sr=audio_signal[1], n_mfcc=13), axis=1)[0],
-        np.mean(librosa.feature.spectral_contrast(y=audio_signal[0],sr=audio_signal[1],n_fft=256)[0,0]),
-        np.mean(librosa.feature.spectral_centroid(y=audio_signal[0],sr=audio_signal[1])[0,0]),
-        np.mean(librosa.feature.spectral_bandwidth(y=audio_signal[0],sr=audio_signal[1])[0,0]),
-        np.mean(librosa.feature.chroma_stft(y=audio_signal[0],sr=audio_signal[1])[0,0]),
-        np.mean(librosa.feature.zero_crossing_rate(y=audio_signal[0])[0,0]),
-        np.mean(librosa.feature.rms(y=audio_signal[0])[0,0]),
-        np.mean(librosa.feature.melspectrogram(y=audio_signal[0],sr=audio_signal[1])[0,0]),
-        np.mean(librosa.yin(y=audio_signal[0], fmin=50, fmax=500))
-    ]
+
 def plot(rows,cols,audios):
     pass
 
@@ -90,8 +79,8 @@ MinMaxScaler()
 # convertFiles('./AUDIO/Cielo-Higuera/Practica-01_Audio/','./AUDIO/All-Audios/','m4a','wav')
 # main('./AUDIO/All-Audios/')
 #print(prepareData())
-denoise('./AUDIO/All-Audios/Metodo-01/','./AUDIO/All-Audios/Metodo-01_Denoised/')
-
-
-
+# denoise('./AUDIO/All-Audios/Metodo-01/','./AUDIO/All-Audios/Metodo-01_Denoised/')
+# renameFiles('./AUDIO/All-Audios/Metodo-03/',suffix='_Raw')
+timeStretch('./AUDIO/All-Audios/Metodo-03_Denoised/','./AUDIO/All-Audios/Metodo-03_Denoised/',rate=1.5)
+# preprocess_audio('./AUDIO/All-Audios/Metodo-03/','./AUDIO/All-Audios/Metodo-03_Denoised/')
 #convertFiles('./AUDIO/All-Audios/','./AUDIO/All-Audios/','opus','wav')
